@@ -1,0 +1,26 @@
+<div class="">
+    <div [formGroup]="formPokemon">
+        <div class="row">
+            <div class="name-align col-sm-12 col-md-1">
+                <label class="" for="">Nombre</label>
+            </div>
+            <div class="btn-group col-sm-12 col-md-4">
+                <div class="">
+                    <input class="form-control" type="text" 
+                    name="name" 
+                    id="name"
+                    formControlName="pokemonName">
+                </div>
+                <div class="">
+                    <button class="btn btn-outline-primary" (click)="searchPokemon()">Buscar</button>
+                </div>
+                
+            </div>
+            
+        </div>
+    
+        <div>
+            <img src={{this.imagen}} alt="">
+        </div>
+    </div>
+</div>
