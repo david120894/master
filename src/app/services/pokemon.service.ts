@@ -13,4 +13,7 @@ export class PokemonService {
   getPokemon(name:string) {
     return this.http.get(`${this.url}/${name}`)
   }
+  getPokemonAll(number:number) {
+    return this.http.get(`${this.url}?limit=${number}&offset=0`)
+  }
 }
