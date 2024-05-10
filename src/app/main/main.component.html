@@ -1,4 +1,4 @@
-<div class="">
+<div class="mb-2">
     <div [formGroup]="formPokemon">
         <div class="row">
             <div class="name-align col-sm-12 col-md-1">
@@ -6,21 +6,43 @@
             </div>
             <div class="btn-group col-sm-12 col-md-4">
                 <div class="">
-                    <input class="form-control" type="text" 
-                    name="name" 
+                    <input class="form-control" type="text"
+                    name="name"
                     id="name"
                     formControlName="pokemonName">
                 </div>
                 <div class="">
                     <button class="btn btn-outline-primary" (click)="searchPokemon()">Buscar</button>
                 </div>
-                
+
             </div>
-            
-        </div>
-    
-        <div>
-            <img src={{this.imagen}} alt="">
+
         </div>
     </div>
+    <div class="">
+      <img src={{this.imagen}} alt="">
+    </div>
 </div>
+<div class="pokemon-flex">
+  <div class="row">
+    <div *ngFor="let item of listPokemon; let i = index" class="col-2">
+      <div class="card-container"
+        (mouseenter)="onMouseEnter(i)"
+        (mouseleave)="onMouseLeave()"
+        [ngClass]="{'grow': isHovered && hoveredIndex === i}">
+        <div class="card mb-2 mt-2 d-flex align-items-center font-family-name-pokemon">
+          <div>
+            <img class="height-width-imagen" [src]="item.sprites.other.dream_world.front_default" alt="">
+          </div>
+          {{ item.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
