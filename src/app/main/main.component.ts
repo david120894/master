@@ -29,15 +29,16 @@ export class MainComponent implements OnInit{
   get form() {
     return this.formPokemon.controls
   }
+  
   get pokemonName() {
     return this.formPokemon.get('pokemonName') as FormControl
   }
+
   get imagenPokemon() {
     return this.formPokemon.get('imagenPokemon') as FormControl
   }
 
   constructor(private pokemonService: PokemonService){
-
   }
   ngOnInit() {
     this.form['numberPokemon'].setValue(10)
@@ -86,5 +87,14 @@ export class MainComponent implements OnInit{
   onMouseLeave() {
     this.isHovered = false;
     this.hoveredIndex = -1;
+  }
+
+  enviarWhatsapp(numero: string, imgUrl: string) {
+    const telefono = numero;
+    console.log(telefono)
+    console.log(imgUrl)
+    const mensaje = "Hola, ¿cómo estás? El Precio De la Moto https://www.jchmotos.com.pe/uploads/shares/motos/BLOQUE2_2/SPORT_200_ROJO.PNG.png"; 
+    const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(mensaje)}`;
+    window.open(url);
   }
 }
