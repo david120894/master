@@ -3,7 +3,6 @@ import { PokemonService } from '../services/pokemon.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { log } from 'node:console';
 
 @Component({
   selector: 'app-main',
@@ -18,6 +17,8 @@ export class MainComponent implements OnInit{
   imagen:string = ""
   pokemon:any
   listPokemon: Array<any> = []
+  isHovered: boolean = false;
+  hoveredIndex: number = -1;
 
   formPokemon: FormGroup = new FormGroup({
     pokemonName: new FormControl(null),
@@ -26,7 +27,7 @@ export class MainComponent implements OnInit{
   })
 
   get form() {
-    return this.formPokemon.value
+    return this.formPokemon.controls
   }
   get pokemonName() {
     return this.formPokemon.get('pokemonName') as FormControl
@@ -39,8 +40,9 @@ export class MainComponent implements OnInit{
 
   }
   ngOnInit() {
-    this.getAllPokemon(50)
-    this.searchAllPokemon()
+    this.form['numberPokemon'].setValue(10)
+    this.getAllPokemon()
+    // this.searchAllPokemon()
   }
 
   searchPokemon() {
@@ -52,28 +54,29 @@ export class MainComponent implements OnInit{
     })
   }
 
-  getAllPokemon(number: number) {
+  getAllPokemon() {
     this.imagen = ""
-    this.pokemonService.getPokemonAll(number).subscribe((data:any) => {
+    this.listPokemon = []
+    console.log(this.form['numberPokemon'].value)
+    this.pokemonService.getPokemonAll(this.form['numberPokemon'].value).subscribe((data:any) => {
     this.allPokemon = data
     // this.imagen = allPokemon.sprites.other?.dream_world?.front_default
-    console.log(this.allPokemon.results[0].url);
+    console.log(this.allPokemon);
+    this.searchAllPokemon()
     })
   }
 
   searchAllPokemon() {
+    console.log(this.listPokemon)
     this.allPokemon?.results.forEach((element:any) => {
       this.pokemonService.getPokemon(element.name).subscribe((data:any) => {
         this.listPokemon.push(data);
+        console.log(this.listPokemon)
       })
     })
 
     console.log(this.listPokemon)
   }
-
-
-  isHovered: boolean = false;
-  hoveredIndex: number = -1;
 
   onMouseEnter(index: number) {
     this.isHovered = true;
