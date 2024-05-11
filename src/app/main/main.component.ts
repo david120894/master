@@ -50,7 +50,7 @@ export class MainComponent implements OnInit{
     this.imagen = ""
     this.pokemonService.getPokemon(this.pokemonName.value).subscribe((data:any) => {
       this.pokemon = data
-      this.imagen = this.pokemon.sprites.other.showdown.front_default
+      this.imagen = this.pokemon.sprites.other.dream_world.front_default
 
       console.log(this.imagen)
     })

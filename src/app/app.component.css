@@ -4,3 +4,7 @@
 .margin-left{
   margin-left: 10px !important;
 }
+
+.width-200 {
+  width: 300px;
+}
