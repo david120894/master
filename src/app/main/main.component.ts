@@ -29,7 +29,7 @@ export class MainComponent implements OnInit{
   get form() {
     return this.formPokemon.controls
   }
-  
+
   get pokemonName() {
     return this.formPokemon.get('pokemonName') as FormControl
   }
@@ -50,7 +50,8 @@ export class MainComponent implements OnInit{
     this.imagen = ""
     this.pokemonService.getPokemon(this.pokemonName.value).subscribe((data:any) => {
       this.pokemon = data
-      this.imagen = this.pokemon.sprites.other.dream_world.front_default
+      this.imagen = this.pokemon.sprites.other.showdown.front_default
+
       console.log(this.imagen)
     })
   }
@@ -93,7 +94,7 @@ export class MainComponent implements OnInit{
     const telefono = numero;
     console.log(telefono)
     console.log(imgUrl)
-    const mensaje = "Hola, ¿cómo estás? El Precio De la Moto https://www.jchmotos.com.pe/uploads/shares/motos/BLOQUE2_2/SPORT_200_ROJO.PNG.png"; 
+    const mensaje = "Hola, ¿cómo estás? El Precio De la Moto https://www.jchmotos.com.pe/uploads/shares/motos/BLOQUE2_2/SPORT_200_ROJO.PNG.png";
     const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(mensaje)}`;
     window.open(url);
   }
